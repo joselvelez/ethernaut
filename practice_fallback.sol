@@ -1,10 +1,11 @@
-pragma solidity ^0.5.11;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.11;
 
 contract Fallback {
 
-    event Log(uint gas);
+    event Log(uint gasLeft);
 
-    function () external payable {
+    fallback () external payable {
 
         // Recommend to NOT add any logic to a fallback funcion.
         // send / transfer methods only forwards 2300 gas to this fallback function,
@@ -13,6 +14,11 @@ contract Fallback {
 
         emit Log(gasleft());
         // Global variable: gasleft() returns (uint256): remaining gas
+
+        uint gasBegin = gasleft() + 1;
+
+        emit Log(gasleft());
+        emit Log(gasBegin);
     }
 
     function getBalance() public view returns (uint) {
@@ -26,12 +32,12 @@ contract SendToFallback {
     }
 
     function callFallBack(address payable _to) public payable {
-        (bool sent,) = _to.call.value(msg.value) ("");
+        (bool sent,) = _to.call{ value: msg.value} ("");
         require(sent, "Failed to send Ether");
     }
 
     function callFallBackWithGasSet(address payable _to, uint gasAmount) public payable {
-        (bool sent, ) = _to.call.gas(gasAmount).value(msg.value) ("");
+        (bool sent, ) = _to.call{ value: msg.value, gas: gasAmount} ("");
         require(sent, "Failed to send Ether");
     }
 }
