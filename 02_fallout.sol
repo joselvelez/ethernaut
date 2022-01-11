@@ -37,3 +37,9 @@ contract Fallout {
     return allocations[allocator];
   }
 }
+
+/*
+  Reference:
+  - Constructors: https://docs.soliditylang.org/en/v0.8.11/contracts.html?#constructors
+  - Prior to 0.4.22, constructor functions were named the same as the contract. Deprecated in 0.5.0
+ */
