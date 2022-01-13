@@ -46,3 +46,8 @@ await contract.Fal1out();
 // Get current contract owner
 await contract.owner();
 ```
+
+## Level 3 - Coin Flip
+
+The contract attempts to generate randomness via blockhash and a state variable to determine the outcome of a coin flip. The problem is that it is possible to calculate in advance what the outcome of the 'random' flip will be with the given inputs to the coinFlip function. By deploying a custom contract that conditionally calls the target contract's flip() function only when the expected outcome matches the desired result, the goal of reaching 10 consecutive wins is possible.
+
